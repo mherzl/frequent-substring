@@ -139,6 +139,22 @@ $ cat res/formula | subs -r 150
 *sqrt(e^2 - h^2)*
 ```
 
+### Search for an exact string:
+
+```
+$ subs -i formula-substitute -c "sqrt(e^2 - h^2)"
+190
+```
+
+with verbose:
+
+```
+$ subs -i formula-substitute -c "sqrt(e^2 - h^2)" -v
+counting the number of occurrences of sqrt(e^2 - h^2) in the content of formula-substitute
+content has length: 13209
+number of subsequences of exact length 15: 13195
+number of occurrences of the exact string 'sqrt(e^2 - h^2)': 190
+```
 
 
 
