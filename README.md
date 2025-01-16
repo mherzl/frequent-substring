@@ -13,6 +13,10 @@ It works by hashing the subsequences that it's counting, to reduce memory consum
 The motivating use-case was to aid in simplifying long mathematical expressions, too long for ordinary algebra systems (e.g. sage, mathematica) to simplify without exhausting memory.
 It has successfully found a longest-substring on a >2.5M character sequence, which led to memory exhaustion on those ordinary algebra systems (on a system with 11Gi of ram).
 
+## Get Started
+
+Run `make` to build via stack and then copy the `subs` executable to `build/subs`.
+
 ## Help Doc
 
 ```
