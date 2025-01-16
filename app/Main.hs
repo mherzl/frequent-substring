@@ -6,6 +6,7 @@ import FrequentSubstring ( mostFrequentSubstringN
                          , countSubsequencesWithLengthAtLeast
                          , countSubsequencesOfLength
                          , longestSubstringWithRRepeats
+                         , countSpecificSubstring
                          )
 import Options.Applicative
 import Data.Text.IO (readFile, putStrLn, getContents)
@@ -14,6 +15,7 @@ import qualified Data.Text as T (length)
 import Data.Text.Lazy (fromStrict, toStrict)
 import Util (showText)
 import Text.Replace (Replace(Replace), replaceWithList, text'fromText)
+import qualified Data.List as L (length)
 
 data Options = Options
   (Maybe FilePath) -- inputPath
@@ -21,6 +23,7 @@ data Options = Options
   (Maybe Int) -- repeats; used to find the longest subsequence which repeats this many times
   (Maybe String) -- substitute; replace the subsequence found with this
   Bool -- isVerbose
+  (Maybe String) -- count; count the number of instances of a given subsequence
 
 options :: Parser Options
 options = Options
@@ -53,6 +56,12 @@ options = Options
          <> short 'v'
          <> help "whether to display counts, etc."
           )
+      <*> optional ( strOption
+          ( long "count"
+         <> short 'c'
+         <> metavar "String"
+         <> help "count the number of instances of a given subsequence"
+          ))
 
 main :: IO ()
 main = greet =<< execParser opts
@@ -63,14 +72,36 @@ main = greet =<< execParser opts
                  )
 
 greet :: Options -> IO ()
-greet (Options _ Nothing Nothing Nothing _) = do
+greet (Options inputPathMb _ _ _ isVerbose (Just count)) = do
+  if isVerbose then do
+    putStrLn $ "counting the number of occurrences of "
+            <> pack count
+            <> " in the content of "
+            <> nameInputSource inputPathMb
+  else return ()
+  content <- getSequence inputPathMb
+  if isVerbose then do
+    let contentLength = T.length content
+    let countLength = L.length count
+    putStrLn $ "content has length: " <> showText contentLength
+    putStrLn $ "number of subsequences of exact length " <> showText countLength <> ": "
+            <> showText (countSubsequencesOfLength contentLength countLength)
+  else return ()
+  let occurrences = countSpecificSubstring (pack count) content
+  if isVerbose then do
+    putStrLn $ "number of occurrences of the exact string '"
+            <> (pack count)
+            <> "': "
+            <> showText occurrences
+  else putStrLn (showText occurrences)
+greet (Options _ Nothing Nothing Nothing _ _) = do
   putStrLn "No length nor number-of-repeats was specified; nothing to do."
-greet (Options inputPathMb (Just length) Nothing Nothing isVerbose) = do
+greet (Options inputPathMb (Just length) Nothing Nothing isVerbose _) = do
   if isVerbose then do
     putStrLn $ "Finding the most frequent subsequence of length "
             <> showText length <> " in the content of "
             <> nameInputSource inputPathMb
-    else return ()
+  else return ()
   content <- getSequence inputPathMb
   if isVerbose then do
     let contentLength = T.length content
@@ -86,7 +117,7 @@ greet (Options inputPathMb (Just length) Nothing Nothing isVerbose) = do
     putStrLn $ "repeats: " <> showText count
   else do
     putStrLn substring
-greet (Options inputPathMb Nothing (Just repeats) Nothing isVerbose) = do
+greet (Options inputPathMb Nothing (Just repeats) Nothing isVerbose _) = do
   if isVerbose then do
     putStrLn $ "Finding the longest subsequence that repeats "
             <> showText repeats
@@ -108,11 +139,11 @@ greet (Options inputPathMb Nothing (Just repeats) Nothing isVerbose) = do
     putStrLn $ "repeats: " <> showText count
   else do
     putStrLn substring
-greet (Options _ Nothing Nothing (Just _) _) = do
+greet (Options _ Nothing Nothing (Just _) _ _) = do
   putStrLn "No length nor number-of-repeats was specified; nothing to do."
-greet (Options _ (Just _) (Just _) Nothing _) = do
+greet (Options _ (Just _) (Just _) Nothing _ _) = do
   putStrLn "Both length and number-of-repeats was specified; this functionality does not yet exit."
-greet (Options inputPathMb (Just length) Nothing (Just substitute) isVerbose) = do
+greet (Options inputPathMb (Just length) Nothing (Just substitute) isVerbose _) = do
   if isVerbose then do
     putStrLn $ "Finding the most frequent subsequence of length "
             <> showText length <> " in the content of "
@@ -138,7 +169,7 @@ greet (Options inputPathMb (Just length) Nothing (Just substitute) isVerbose) = 
     putStrLn replaced
   else do
     putStrLn replaced
-greet (Options inputPathMb Nothing (Just repeats) (Just substitute) isVerbose) = do
+greet (Options inputPathMb Nothing (Just repeats) (Just substitute) isVerbose _) = do
   if isVerbose then do
     putStrLn $ "Finding the longest subsequence that repeats "
             <> showText repeats
@@ -165,7 +196,7 @@ greet (Options inputPathMb Nothing (Just repeats) (Just substitute) isVerbose) =
     putStrLn replaced
   else do
     putStrLn replaced
-greet (Options _ (Just _) (Just _) (Just _) _) = do
+greet (Options _ (Just _) (Just _) (Just _) _ _) = do
   putStrLn "Both length and number-of-repeats was specified; this functionality does not yet exit."
 
 nameInputSource :: Maybe String -> Text

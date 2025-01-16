@@ -5,14 +5,16 @@ module FrequentSubstring
   , substringsLengthN
   , countSubsequencesWithLengthAtLeast
   , countSubsequencesOfLength
+  , countSpecificSubstring
   ) where
 
 import FreqMap (mostFrequentInList)
 
-import Prelude hiding (drop, length)
-import Data.Text (chunksOf, Text, drop, length, singleton, index)
+import Prelude hiding (drop, length, take)
+import Data.Text (chunksOf, Text, drop, length, singleton, index, tails, take)
 import Data.Hashable (hash)
 import Data.Maybe (fromMaybe)
+import qualified Data.List as L (length)
 
 type Hash = Int
 type Count = Int
@@ -51,6 +53,14 @@ longestSubstringWithRRepeatsInternal r t u@(ul,ut,ur) l@(ll,_,_)
         g = (gl,gt,gr)
 
 -- ===========================
+-- | CountOccurrences
+-- ~~~~~~~~~~~~
+
+countSpecificSubstring :: Text -> Text -> Int
+countSpecificSubstring s t = L.length $ filter (==s) (take l <$> (tails t))
+  where l = length s
+
+-- ===========================
 -- | Find by Length
 -- ~~~~~~~~~~~~
 
@@ -77,7 +87,7 @@ chunksLengthN :: Int -> Text -> [Text]
 chunksLengthN n t = filter ((n<=) . length) $ chunksOf n t
 
 -- ===========================
--- | Count
+-- | Count Search Space
 -- ~~~~~~~~~~~~
 
 countSubsequencesWithLengthAtLeast :: Int -> Int -> Int
