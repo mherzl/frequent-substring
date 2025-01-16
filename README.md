@@ -73,6 +73,8 @@ $ subs -i res/formula-substitute -l 17
 *sqrt(e^2 - h^2)*
 ```
 
+with verbose:
+
 ```
 $ subs -i res/formula-substitute -l 17 -v
 Finding the most frequent subsequence of length 17 in the content of res/formula-substitute
@@ -98,6 +100,8 @@ $ subs -i res/formula-substitute -l 17 -s "*eMinusH*"
 $ subs -i res/formula-substitute -r 150
 *sqrt(e^2 - h^2)*
 ```
+
+with verbose:
 
 ```
 $ subs -i res/formula-substitute -r 150 -v
