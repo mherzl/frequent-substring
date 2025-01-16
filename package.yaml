@@ -1,0 +1,64 @@
+name:                frequent-substring
+version:             0.1.0.0
+github:              "mherzl/frequent-substring"
+license:             BSD-3-Clause
+author:              "Matthew Herzl"
+maintainer:          "matthew@herzl.email"
+copyright:           "2025 Matthew Herzl"
+
+extra-source-files:
+- README.md
+
+# Metadata used when publishing your package
+# synopsis:            Identifies and replaces frequent subsequences in long strings
+# category:            CLI Tool
+
+# To avoid duplicated efforts in documentation and dealing with the
+# complications of embedding Haddock markup inside cabal files, it is
+# common to point users to the README.md file.
+description:         Please see the README on GitHub at <https://github.com/mherzl/frequent-substring#readme>
+
+dependencies:
+- base >= 4.7 && < 5
+- hashable
+- text
+- containers
+- optparse-applicative
+- HUnit
+- text-replace
+
+ghc-options:
+- -Wall
+- -Wcompat
+- -Widentities
+- -Wincomplete-record-updates
+- -Wincomplete-uni-patterns
+- -Wmissing-export-lists
+- -Wmissing-home-modules
+- -Wpartial-fields
+- -Wredundant-constraints
+
+library:
+  source-dirs: src
+
+executables:
+  frequent-substring-exe:
+    main:                Main.hs
+    source-dirs:         app
+    ghc-options:
+    - -threaded
+    - -rtsopts
+    - -with-rtsopts=-N
+    dependencies:
+    - frequent-substring
+
+tests:
+  frequent-substring-test:
+    main:                Spec.hs
+    source-dirs:         test
+    ghc-options:
+    - -threaded
+    - -rtsopts
+    - -with-rtsopts=-N
+    dependencies:
+    - frequent-substring
