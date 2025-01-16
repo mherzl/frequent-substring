@@ -10,8 +10,8 @@ extra-source-files:
 - README.md
 
 # Metadata used when publishing your package
-# synopsis:            Identifies and replaces frequent subsequences in long strings
-# category:            CLI Tool
+synopsis:            Identifies and replaces frequent subsequences in long strings
+category:            CLI Tool
 
 # To avoid duplicated efforts in documentation and dealing with the
 # complications of embedding Haddock markup inside cabal files, it is
@@ -20,12 +20,12 @@ description:         Please see the README on GitHub at <https://github.com/mher
 
 dependencies:
 - base >= 4.7 && < 5
-- hashable
-- text
-- containers
-- optparse-applicative
-- HUnit
-- text-replace
+- hashable >= 1.4.3.0 && < 1.5
+- text >= 2.0.2 && < 2.1
+- containers >= 0.6.7 && < 0.7
+- optparse-applicative >= 0.17.1.0 && < 0.18
+- HUnit >= 1.6.2.0 && < 1.7
+- text-replace >= 0.1.0.3 && < 0.2
 
 ghc-options:
 - -Wall
