@@ -5,9 +5,9 @@
 `subs` is a tool for identifying frequent substrings in a text file, and substituting them for something else.
 It is implemented in Haskell.
 
-With the `-l` option, it can find the most frequent subsequence of a specified length.
-With the `-r` option, it can find the longest subsequence that repeats at least the specified number of times.
-With the `-s` option, in concert with the others, it can substitute the specified string for the subsequence found.
+* With the `-l` option, it can find the most frequent subsequence of a specified length.
+* With the `-r` option, it can find the longest subsequence that repeats at least the specified number of times.
+* With the `-s` option, in concert with the others, it can substitute the specified string for the subsequence found.
 
 It works by hashing the subsequences that it's counting, to reduce memory consumption.
 The motivating use-case was to aid in simplifying long mathematical expressions, too long for ordinary algebra systems (e.g. sage, mathematica) to simplify without exhausting memory.
