@@ -69,15 +69,15 @@ Available options:
 ### Searching by length:
 
 ```
-$ subs -i res/formula-substitute -l 17
+$ subs -i res/formula -l 17
 *sqrt(e^2 - h^2)*
 ```
 
 with verbose:
 
 ```
-$ subs -i res/formula-substitute -l 17 -v
-Finding the most frequent subsequence of length 17 in the content of res/formula-substitute
+$ subs -i res/formula -l 17 -v
+Finding the most frequent subsequence of length 17 in the content of res/formula
 content has length: 13209
 number of subsequences of exact length 17: 13193
 substring:
@@ -89,7 +89,7 @@ repeats: 190
 ### Performing a substitution when searching by length:
 
 ```
-$ subs -i res/formula-substitute -l 17 -s "*eMinusH*"
+$ subs -i res/formula -l 17 -s "*eMinusH*"
 (16*c^6 + 24*c^4*d^2 + 12*c^2*d^4 + 2*d^6 - 24*c^4*e^2 + 24*c^2*d^2*e^2 + 18*d^4*e^2 + 12*c^2*e^4 - 18*d^2*e^4 - 2*e^6 - 84*c^4*g^2 - 30*c^2*d^2*g^2 + 6*d^4*g^2 + 66*c^2*e^2*g^2 - 42*d^2*e^2*g^2 - 12*e^4*g^2 + 66*c^2*g^4 + 6*d^2*g^4 + 12*e^2*g^4 + 2*g^6 - 96*c^4*g*h - 96*c^2*d^2*g*h - 24*d^4*g*h + 96*c^2*e^2*g*h - 48*d^2*e^2*g*h - 24*e^4*g*h + 192*c^2*g^3*h - 12*d^2*g^3*h - 60*e^2*g^3*h + 12*g^5*h - 24*c^4*h^2 - 72*c^2*d^2*h^2 - 30*d^4*h^2 + 24*c^2*e^2*h^2 + 12*d^2*e^2*h^2 - 6*e^4*h^2 + 222*c^2*g^2*h^2 + 132*d^2*g^2*h^2 - 102*e^2*g^2*h^2 - 54*g^4*h^2 + 96*c^2*g*h^3 + 144*d^2*g*h^3 - 48*e^2*g*h^3 - 116*g^3*h^3 + 12*c^2*h^4 + 30*d^2*h^4 - 6*e^2*h^4 - 90*g^2*h^4 - 24*g*h^5 - 2*h^6 + 48*eMinusH*c^4*d + 48*eMinusH*c^2*d^3 + 12*eMinusH*d^5 - 156*eMinusH*c^2*d*e^2 + 120*eMinusH*d^3*e^2 +
 ...
 ```
@@ -97,15 +97,15 @@ $ subs -i res/formula-substitute -l 17 -s "*eMinusH*"
 ### Searching by number of repeats:
 
 ```
-$ subs -i res/formula-substitute -r 150
+$ subs -i res/formula -r 150
 *sqrt(e^2 - h^2)*
 ```
 
 with verbose:
 
 ```
-$ subs -i res/formula-substitute -r 150 -v
-Finding the longest subsequence that repeats 150 times, in the content of res/formula-substitute
+$ subs -i res/formula -r 150 -v
+Finding the longest subsequence that repeats 150 times, in the content of res/formula
 content has length: 13209
 number of subsequences with length at least 0: 87258655
 substring:
@@ -117,19 +117,19 @@ repeats: 190
 ### Performing a substitution when searching by number of repeats:
 
 ```
-$ subs -i res/formula-substitute -r 150 -s "*eMinusH*"
+$ subs -i res/formula -r 150 -s "*eMinusH*"
 (16*c^6 + 24*c^4*d^2 + 12*c^2*d^4 + 2*d^6 - 24*c^4*e^2 + 24*c^2*d^2*e^2 + 18*d^4*e^2 + 12*c^2*e^4 - 18*d^2*e^4 - 2*e^6 - 84*c^4*g^2 - 30*c^2*d^2*g^2 + 6*d^4*g^2 + 66*c^2*e^2*g^2 - 42*d^2*e^2*g^2 - 12*e^4*g^2 + 66*c^2*g^4 + 6*d^2*g^4 + 12*e^2*g^4 + 2*g^6 - 96*c^4*g*h - 96*c^2*d^2*g*h - 24*d^4*g*h + 96*c^2*e^2*g*h - 48*d^2*e^2*g*h - 24*e^4*g*h + 192*c^2*g^3*h - 12*d^2*g^3*h - 60*e^2*g^3*h + 12*g^5*h - 24*c^4*h^2 - 72*c^2*d^2*h^2 - 30*d^4*h^2 + 24*c^2*e^2*h^2 + 12*d^2*e^2*h^2 - 6*e^4*h^2 + 222*c^2*g^2*h^2 + 132*d^2*g^2*h^2 - 102*e^2*g^2*h^2 - 54*g^4*h^2 + 96*c^2*g*h^3 + 144*d^2*g*h^3 - 48*e^2*g*h^3 - 116*g^3*h^3 + 12*c^2*h^4 + 30*d^2*h^4 - 6*e^2*h^4 - 90*g^2*h^4 - 24*g*h^5 - 2*h^6 + 48*eMinusH*c^4*d + 48*eMinusH*c^2*d^3 + 12*eMinusH*d^5 - 156*eMinusH*c^2*d*e^2 + 120*eMinusH*d^3*e^2 +
 ```
 
 ### Reading from standard input:
 
 ```
-$ cat res/formula-substitute | subs -l 17
+$ cat res/formula | subs -l 17
 *sqrt(e^2 - h^2)*
 ```
 
 ```
-$ cat res/formula-substitute | subs -r 150
+$ cat res/formula | subs -r 150
 *sqrt(e^2 - h^2)*
 ```
 
