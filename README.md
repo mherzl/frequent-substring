@@ -15,7 +15,9 @@ It has successfully found a longest-substring on a >2.5M character sequence, whi
 
 ## Get Started
 
-Run `make` to build via stack and then copy the `subs` executable to `build/subs`.
+1. Run `make`. This will build via stack and also copy the `subs` executable to `build/subs`.
+2. Place `subs` to within your path.
+3. You are ready to use `subs`.
 
 ## Help Doc
 
