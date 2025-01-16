@@ -8,6 +8,7 @@ copyright:           "2025 Matthew Herzl"
 
 extra-source-files:
 - README.md
+- CHANGELOG.md
 
 # Metadata used when publishing your package
 synopsis:            Identifies and replaces frequent subsequences in long strings
