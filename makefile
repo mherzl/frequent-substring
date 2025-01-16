@@ -4,7 +4,7 @@
 subs: build/subs
 
 build/subs: stack-build | build
-	fd frequent-substring-exe .stack-work/install --type f .stack-work | xargs -I{} cp {} build/subs
+	fd frequent-substring-exe .stack-work/install --type f | xargs -I{} cp {} build/subs
 
 .PHONY: stack-build
 stack-build:
