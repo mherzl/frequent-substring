@@ -10,7 +10,6 @@ module FrequentSubstring
 import FreqMap (mostFrequentInList)
 
 import Prelude hiding (drop, length)
-import Data.List (lookup)
 import Data.Text (chunksOf, Text, drop, length, singleton, index)
 import Data.Hashable (hash)
 import Data.Maybe (fromMaybe)
@@ -41,11 +40,12 @@ type Bound = (Length, Text, Repeats)
 -- | Precondition: upper-bound-length >= answer's length, and
 -- |               lower-bound-length <= answer's length.
 longestSubstringWithRRepeatsInternal :: Int -> Text -> Bound -> Bound -> (Text, Count)
-longestSubstringWithRRepeatsInternal r t u@(ul,ut,ur) l@(ll,lt,lr)
+longestSubstringWithRRepeatsInternal r t u@(ul,ut,ur) l@(ll,_,_)
   | ur==r = (ut,ur)
   | gl==ll = (gt,gr)
   | gr >= r = longestSubstringWithRRepeatsInternal r t u g
   | gr <  r = longestSubstringWithRRepeatsInternal r t g l
+  | otherwise = error "longestSubstringWithRRepeatsInternal; all cases should have already been covered"
   where gl = (ul+ll) `div` 2
         (gt,gr) = mostFrequentSubstringN gl t
         g = (gl,gt,gr)
