@@ -13,6 +13,28 @@ It works by hashing the subsequences that it's counting, to reduce memory consum
 The motivating use-case was to aid in simplifying long mathematical expressions, too long for ordinary algebra systems (e.g. sage, mathematica) to simplify without exhausting memory.
 It has successfully found a longest-substring on a >2.5M character sequence, which led to memory exhaustion on those ordinary algebra systems (on a system with 11Gi of ram).
 
+## Help Doc
+
+```
+$ subs --help
+frequent-substring help:
+
+Usage: subs [-i|--filepath FilePath] [-l|--length INT] [-r|--repeats INT] 
+            [-s|--substitute String] [-v|--verbose]
+
+  find frequent subsequences in a text file
+
+Available options:
+  -i,--filepath FilePath   path to input file containing the text sequence
+  -l,--length INT          find the most frequent subsequence of a specified
+                           length
+  -r,--repeats INT         find the longest subsequence which repeats this many
+                           times
+  -s,--substitute String   replace the subsequence found with a specified string
+  -v,--verbose             whether to display counts, etc.
+  -h,--help                Show this help text
+```
+
 ## Typical Workflow
 
 The longest-subsequence function (`-r`) uses a binary search.
@@ -40,28 +62,6 @@ or, obtain the original formula but with a specified substitution applied:
 
 ```
 $ subs -i res/formula -r 189 -s substituteTerm > original-with-substitution-applied.txt
-```
-
-## Help Doc
-
-```
-$ subs --help
-frequent-substring help:
-
-Usage: subs [-i|--filepath FilePath] [-l|--length INT] [-r|--repeats INT] 
-            [-s|--substitute String] [-v|--verbose]
-
-  find frequent subsequences in a text file
-
-Available options:
-  -i,--filepath FilePath   path to input file containing the text sequence
-  -l,--length INT          find the most frequent subsequence of a specified
-                           length
-  -r,--repeats INT         find the longest subsequence which repeats this many
-                           times
-  -s,--substitute String   replace the subsequence found with a specified string
-  -v,--verbose             whether to display counts, etc.
-  -h,--help                Show this help text
 ```
 
 ## Examples
