@@ -125,7 +125,7 @@ $ cat res/formula-substitute | subs -l 17
 ```
 
 ```
-$ subs -i res/formula-substitute -r 150
+$ cat res/formula-substitute | subs -r 150
 *sqrt(e^2 - h^2)*
 ```
 
