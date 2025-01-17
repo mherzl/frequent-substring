@@ -158,7 +158,14 @@ number of occurrences of the exact string 'sqrt(e^2 - h^2)': 190
 
 ### Replace an exact string:
 
+```
+$ echo abbcccddddeeeeeffffffggggggghhhhhhhh | subs -c hhh
+```
 
+```
+$ echo abbcccddddeeeeeffffffggggggghhhhhhhh | subs -c hhh -s ___
+abbcccddddeeeeeffffffggggggg______hh
+```
 
 
 
