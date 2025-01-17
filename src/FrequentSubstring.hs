@@ -10,11 +10,10 @@ module FrequentSubstring
 
 import FreqMap (mostFrequentInList)
 
-import Prelude hiding (drop, length, take)
-import Data.Text (chunksOf, Text, drop, length, singleton, index, tails, take)
+import Prelude hiding (drop, length, take, null)
+import Data.Text (chunksOf, Text, drop, length, singleton, index, take, null)
 import Data.Hashable (hash)
 import Data.Maybe (fromMaybe)
-import qualified Data.List as L (length)
 
 type Hash = Int
 type Count = Int
@@ -57,7 +56,10 @@ longestSubstringWithRRepeatsInternal r t u@(ul,ut,ur) l@(ll,_,_)
 -- ~~~~~~~~~~~~
 
 countSpecificSubstring :: Text -> Text -> Int
-countSpecificSubstring s t = L.length $ filter (==s) (take l <$> (tails t))
+countSpecificSubstring s t
+  | null t = 0
+  | s == take l t = 1 + countSpecificSubstring s (drop l t)
+  | otherwise = countSpecificSubstring s (drop 1 t)
   where l = length s
 
 -- ===========================

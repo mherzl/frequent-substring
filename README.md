@@ -156,5 +156,9 @@ number of subsequences of exact length 15: 13195
 number of occurrences of the exact string 'sqrt(e^2 - h^2)': 190
 ```
 
+### Replace an exact string:
+
+
+
 
 
