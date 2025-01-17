@@ -72,7 +72,7 @@ main = greet =<< execParser opts
                  )
 
 greet :: Options -> IO ()
-greet (Options inputPathMb _ _ _ isVerbose (Just count)) = do
+greet (Options inputPathMb _ _ Nothing isVerbose (Just count)) = do
   if isVerbose then do
     putStrLn $ "counting the number of occurrences of "
             <> pack count
@@ -94,6 +94,24 @@ greet (Options inputPathMb _ _ _ isVerbose (Just count)) = do
             <> "': "
             <> showText occurrences
   else putStrLn (showText occurrences)
+greet (Options inputPathMb _ _ (Just substitute) isVerbose (Just count)) = do
+  if isVerbose then do
+    putStrLn $ "substituting the occurrences of "
+            <> pack count
+            <> " with "
+            <> pack substitute
+            <> " in the content of "
+            <> nameInputSource inputPathMb
+  else return ()
+  content <- getSequence inputPathMb
+  let countOccurrences = countSpecificSubstring (pack count) content
+  let replaced = substituteText content (pack count) (pack substitute)
+  if isVerbose then do
+    putStrLn $ "occurrences found: " <> showText countOccurrences
+    putStrLn $ "content of " <> nameInputSource inputPathMb <> " after replacement:"
+    putStrLn replaced
+  else do
+    putStrLn replaced
 greet (Options _ Nothing Nothing Nothing _ _) = do
   putStrLn "No length nor number-of-repeats was specified; nothing to do."
 greet (Options inputPathMb (Just length) Nothing Nothing isVerbose _) = do
@@ -123,7 +141,7 @@ greet (Options inputPathMb Nothing (Just repeats) Nothing isVerbose _) = do
             <> showText repeats
             <> " times, in the content of "
             <> nameInputSource inputPathMb
-    else return ()
+  else return ()
   content <- getSequence inputPathMb
   if isVerbose then do
     let contentLength = T.length content
@@ -148,6 +166,8 @@ greet (Options inputPathMb (Just length) Nothing (Just substitute) isVerbose _) 
     putStrLn $ "Finding the most frequent subsequence of length "
             <> showText length <> " in the content of "
             <> nameInputSource inputPathMb
+            <> " and substituting them with "
+            <> pack substitute
     else return ()
   content <- getSequence inputPathMb
   if isVerbose then do
