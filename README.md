@@ -26,7 +26,7 @@ $ subs --help
 frequent-substring help:
 
 Usage: subs [-i|--filepath FilePath] [-l|--length INT] [-r|--repeats INT] 
-            [-s|--substitute String] [-v|--verbose]
+            [-s|--substitute String] [-v|--verbose] [-c|--count String]
 
   find frequent subsequences in a text file
 
@@ -38,6 +38,7 @@ Available options:
                            times
   -s,--substitute String   replace the subsequence found with a specified string
   -v,--verbose             whether to display counts, etc.
+  -c,--count String        count the number of instances of a given subsequence
   -h,--help                Show this help text
 ```
 
